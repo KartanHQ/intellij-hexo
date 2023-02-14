@@ -1,7 +1,7 @@
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "1.8.10"
-    id("org.jetbrains.intellij") version "1.10.1"
+    id("org.jetbrains.intellij") version "1.13.0"
 }
 
 group = "com.nekofar.milad"
