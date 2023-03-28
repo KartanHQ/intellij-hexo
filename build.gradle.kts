@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.nekofar.milad"
-version = "1.0.0-alpha.0"
+version = "1.0.0-alpha.1"
 
 repositories {
     mavenCentral()
@@ -26,7 +26,7 @@ intellij {
 
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
-    version.set("1.0.0-alpha.0")
+    version.set("1.0.0-alpha.1")
     groups.set(emptyList())
     repositoryUrl.set("https://github.com/KartanHQ/intellij-remix")
 }
@@ -42,7 +42,7 @@ tasks {
     }
 
     patchPluginXml {
-        version.set("1.0.0-alpha.0")
+        version.set("1.0.0-alpha.1")
         sinceBuild.set("213")
         untilBuild.set("231.*")
 
@@ -62,7 +62,7 @@ tasks {
         // Get the latest available change notes from the changelog file
         changeNotes.set(provider {
             with(changelog) {
-                val changelogItem = getOrNull("1.0.0-alpha.0")
+                val changelogItem = getOrNull("1.0.0-alpha.1")
                     ?: runCatching { getLatest() }.getOrElse { getUnreleased() }
                 renderItem(
                     changelogItem.withHeader(false),
