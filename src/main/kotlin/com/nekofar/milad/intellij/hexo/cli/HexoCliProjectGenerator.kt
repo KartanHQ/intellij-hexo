@@ -11,45 +11,29 @@ import com.nekofar.milad.intellij.hexo.HexoIcons
 import javax.swing.Icon
 
 class HexoCliProjectGenerator : NpmPackageProjectGenerator() {
-    private val packageName = "hexo"
-    private val executable = "hexo"
-    private val initCommand = "init"
+    private data class PackageInfo(val name: String, val executable: String, val command: String)
 
-    override fun getName(): String {
-        return HexoBundle.message("hexo.project.generator.name")
-    }
+    private val packageInfo = PackageInfo("hexo", "hexo", "init")
 
-    override fun getDescription(): String {
-        return HexoBundle.message("hexo.project.generator.description")
-    }
+    override fun getName() = HexoBundle.message("hexo.project.generator.name")
 
-    override fun filters(project: Project, baseDir: VirtualFile): Array<Filter> {
-        return emptyArray()
-    }
+    override fun getDescription() = HexoBundle.message("hexo.project.generator.description")
+
+    override fun filters(project: Project, baseDir: VirtualFile) = emptyArray<Filter>()
 
     override fun customizeModule(p0: VirtualFile, p1: ContentEntry?) {}
 
-    override fun packageName(): String {
-        return packageName
-    }
+    override fun packageName() = packageInfo.name
 
-    override fun presentablePackageName(): String {
-        return HexoBundle.message("hexo.project.generator.presentable.package.name")
-    }
+    override fun presentablePackageName() = HexoBundle.message("hexo.project.generator.presentable.package.name")
 
-    override fun getNpxCommands(): List<NpxPackageDescriptor.NpxCommand> {
-        return listOf(NpxPackageDescriptor.NpxCommand(packageName, executable))
-    }
+    override fun getNpxCommands(): List<NpxPackageDescriptor.NpxCommand> =
+        listOf(NpxPackageDescriptor.NpxCommand(packageInfo.name, packageInfo.executable))
 
-    override fun generateInTemp(): Boolean {
-        return true
-    }
+    override fun generateInTemp() = true
 
-    override fun generatorArgs(project: Project?, dir: VirtualFile?, settings: Settings?): Array<String> {
-        return arrayOf(initCommand, project?.name.toString())
-    }
+    override fun generatorArgs(project: Project?, dir: VirtualFile?, settings: Settings?) =
+        arrayOf(packageInfo.command, project?.name.toString())
 
-    override fun getIcon(): Icon {
-        return HexoIcons.ProjectGenerator
-    }
+    override fun getIcon(): Icon = HexoIcons.ProjectGenerator
 }
